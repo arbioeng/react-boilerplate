@@ -2,7 +2,7 @@ import React, { createContext, useState, useLayoutEffect, useContext, useCallbac
 import { useAsync } from 'react-async'
 
 import { login as authLogin } from 'services/auth'
-import { setAccessToken, setRefreshToken, clearToken, bootstrapAppData } from 'helpers'
+import { setAccessToken, setRefreshToken, setToken, clearToken, bootstrapAppData } from 'helpers'
 
 import Loader from 'components/Loader'
 
@@ -25,6 +25,8 @@ const AuthProvider = props => {
       const { access_token, refresh_token, ...user } = await authLogin(data)
       setAccessToken(access_token)
       setRefreshToken(refresh_token)
+      // trocar "access_token" e "refresh_token" por "token" caso a autenticação seja feita com OAuth0
+      // setToken(token)
       reload()
 
       return { user }
